@@ -1,5 +1,25 @@
-# Welcome to GitHub Desktop!
+# Star Isakson — CS / IT Portfolio
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
+This repository serves as an index of my school and technical projects.
+Each linked project includes source code, documentation, and notes on what I learned.
 
-Write your name on line 6, save it, and then head back to GitHub Desktop.
+## Core Skills
+- Java (data structures, recursion, file I/O)
+- Linux system administration
+- Networking fundamentals (CIDR, subnets)
+- Security tooling (Snort IDS, logging, analysis)
+- Documentation & troubleshooting
+
+## Selected Projects
+
+### Java Projects
+- **Linked Lists & Arrays**  
+  https://github.com/StardustRaven/cs145-linked-lists
+  Implemented linked lists, arrays, and string handling in Java.
+
+- **Recursion: LCM & Pascal’s Triangle**  
+  https://github.com/StardustRaven/java-recursion-labs  
+  Recursive and iterative solutions with documented tradeoffs.
+
+### In Progress
+- Additional labs and projects added as coursework progresses.
