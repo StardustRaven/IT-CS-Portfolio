@@ -14,7 +14,7 @@ Each linked project includes source code, documentation, and notes on what I lea
 
 ### Java Projects
 - **Linked Lists & Arrays**  
-  https://github.com/StardustRaven/cs145-linked-lists
+  
   Implemented linked lists, arrays, and string handling in Java.
 
 - **Recursion: LCM & Pascal’s Triangle**  
