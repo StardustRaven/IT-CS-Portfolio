@@ -1,0 +1,10 @@
+# Java compiled output
+*.class
+
+# IDE junk
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
