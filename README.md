@@ -1,11 +1,11 @@
-# Summer Isakson — CS / IT Portfolio
+# IT-CS-Portfolio
 
-This repository serves as an index of my school and technical projects.
-Each linked project includes source code, documentation, and notes on what I learned.
+School assignments and lab work I’m sharing publicly for prospective employers.
 
-## Core Skills
-- Java (data structures, recursion, file I/O)
-- Linux system administration
-- Networking fundamentals (CIDR, subnets)
-- Security tooling (Snort IDS, logging, analysis)
-- Documentation & troubleshooting
+## Highlights
+- Java / CS coursework (data structures, recursion, I/O)
+- IT & troubleshooting notes / writeups
+- Cybersecurity labs (when allowed by class policy)
+
+## Structure
+Each folder is labeled by course/week/assignment when possible.
