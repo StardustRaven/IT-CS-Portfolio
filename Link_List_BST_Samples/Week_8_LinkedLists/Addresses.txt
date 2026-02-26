@@ -1,0 +1,49 @@
+Ada Lovelace
+12 Analytical Engine Way
+London
+555-0101
+
+Nikola Tesla
+188 Alternating Current Ave
+New York
+555-0113
+
+Prince Nelson
+1984 Purple Rain Blvd
+Minneapolis
+555-0199
+
+Grace Hopper
+44 Debugging Ln
+Arlington
+555-0147
+
+Alan Turing
+23 Enigma Rd
+Manchester
+555-0109
+
+Hedy Lamarr
+77 Frequency Spread St
+Los Angeles
+555-0161
+
+Octavia Butler
+451 Parable Ct
+Pasadena
+555-0184
+
+Toni Morrison
+161 Bluest Eye Way
+Lorain
+555-0170
+
+David Bowie
+42 Starman Dr
+London
+555-0108
+
+Ursula Le Guin
+9 Earthsea Cir
+Portland
+555-0129
