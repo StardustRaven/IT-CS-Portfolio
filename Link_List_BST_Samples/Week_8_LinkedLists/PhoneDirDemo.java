@@ -4,6 +4,7 @@ public class PhoneDirDemo {
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         ManagerClass dir = new ManagerClass();
+        dir.loadFromFile("Addresses.txt");
 
         boolean running = true;
         while (running) {
