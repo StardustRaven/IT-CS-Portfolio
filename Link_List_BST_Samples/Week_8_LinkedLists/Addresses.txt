@@ -1,3 +1,6 @@
+# Sample address data for CS II linked list project
+# Format: Name / Address / City / Phone (blank line between records)
+
 Ada Lovelace
 12 Analytical Engine Way
 London

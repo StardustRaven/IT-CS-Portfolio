@@ -13,9 +13,33 @@ public class ManagerClass {
     // Add to front (fast + simple)
     public void addFirst(String fName, String lName, String address, String city, String pNumber) {
         ObjectClass newNode = new ObjectClass(fName, lName, address, city, pNumber);
+
+            // Case 1: empty list OR belongs at the front
+    if (head == null ||
+        newNode.fullNameKey().compareTo(head.fullNameKey()) < 0) {
+
         newNode.next = head;
         head = newNode;
+        return;
     }
+
+    ObjectClass current = head;
+
+    // Walk until the next node should come AFTER newNode
+    while (current.next != null &&
+           current.next.fullNameKey()
+               .compareTo(newNode.fullNameKey()) < 0) {
+
+        current = current.next;
+    }
+
+    // Insert between current and current.next
+    newNode.next = current.next;
+    current.next = newNode;
+}
+       // newNode.next = head;
+       // head = newNode;
+    
 
     // Search by first + last name
     public ObjectClass find(String fName, String lName) {
@@ -77,9 +101,10 @@ public class ManagerClass {
 
             while (file.hasNextLine()) {
                 String nameLine = file.nextLine().trim();
-                if (nameLine.isEmpty())
+                // skip blank lines or comment lines
+                if (nameLine.isEmpty() || nameLine.startsWith("#")) {
                     continue;
-
+                }
                 String[] parts = nameLine.split("\\s+");
                 String fName = parts[0];
                 String lName = (parts.length > 1)
@@ -100,20 +125,21 @@ public class ManagerClass {
 
                 addFirst(fName, lName, address, city, pNumber);
 
-        // Consume one optional blank separator line if present (but don't swallow the next name)
-        if (file.hasNextLine()) {
-       
-        String sep = file.nextLine();
-        if (!sep.trim().isEmpty()) {
-            
-            System.out.println("Warning: expected blank separator, got: " + sep);
-        }
-    }   
-} 
-    System.out.println("Loaded directory from: " + filename);
+                // Consume one optional blank separator line if present (but don't swallow the
+                // next name)
+                if (file.hasNextLine()) {
 
-} catch (FileNotFoundException e) {
-    System.out.println("Could not load file: " + filename);
-}
-}
+                    String sep = file.nextLine();
+                    if (!sep.trim().isEmpty()) {
+
+                        System.out.println("Warning: expected blank separator, got: " + sep);
+                    }
+                }
+            }
+            System.out.println("Loaded directory from: " + filename);
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Could not load file: " + filename);
+        }
+    }
 }

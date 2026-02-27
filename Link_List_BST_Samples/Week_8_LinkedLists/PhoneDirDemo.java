@@ -41,8 +41,10 @@ public class PhoneDirDemo {
                     String l = kb.nextLine();
 
                     ObjectClass found = dir.find(f, l);
-                    if (found != null) System.out.println("FOUND: " + found);
-                    else System.out.println("Not found.");
+                    if (found != null)
+                        System.out.println("FOUND: " + found);
+                    else
+                        System.out.println("Not found.");
                 }
                 case 3 -> {
                     System.out.print("First name: ");
@@ -54,12 +56,11 @@ public class PhoneDirDemo {
                     System.out.println(ok ? "Deleted." : "Not found (nothing deleted).");
                 }
                 case 4 -> dir.printAll();
-                
+
                 case 5 -> running = false;
                 default -> System.out.println("Invalid choice.");
             }
         }
-
         kb.close();
         System.out.println("Bye.");
     }
