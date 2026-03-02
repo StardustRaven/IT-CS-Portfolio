@@ -142,30 +142,39 @@ public class ManagerClass {
             System.out.println("Could not load file: " + filename);
         }
     }
-        public void saveToFile(String filename) {
-        try (PrintWriter out = new PrintWriter(filename)) {
 
-        ObjectClass current = head;
-        while (current != null) {
+    public void saveToFile(String filename) {
+        File file = new File(filename);
 
-            // Name line
-            out.println(current.fName + " " + current.lName);
+        // Check if file already exists
+        if (file.exists()) {
+            System.out.print("File already exists. Overwrite? (y/n): ");
 
-            // Address lines
-            out.println(current.address);
-            out.println(current.city);
-            out.println(current.pNumber);
+            Scanner kb = new Scanner(System.in);
+            String response = kb.nextLine().trim().toLowerCase();
 
-            // Blank separator line
-            out.println();
-
-            current = current.next;
+            if (!response.equals("y")) {
+                System.out.println("Save cancelled.");
+                return;
+            }
         }
 
-        System.out.println("Directory saved to: " + filename);
+        try (PrintWriter out = new PrintWriter(file)) {
+
+            ObjectClass current = head;
+            while (current != null) {
+                out.println(current.fName + " " + current.lName);
+                out.println(current.address);
+                out.println(current.city);
+                out.println(current.pNumber);
+                out.println();
+                current = current.next;
+            }
+
+            System.out.println("Directory saved to: " + filename);
 
         } catch (FileNotFoundException e) {
-        System.out.println("Could not save file: " + filename);
+            System.out.println("Could not save file: " + filename);
         }
     }
 }
