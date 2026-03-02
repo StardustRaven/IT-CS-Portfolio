@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.io.PrintWriter;
 
 public class ManagerClass {
     private ObjectClass head;
@@ -14,32 +15,31 @@ public class ManagerClass {
     public void addFirst(String fName, String lName, String address, String city, String pNumber) {
         ObjectClass newNode = new ObjectClass(fName, lName, address, city, pNumber);
 
-            // Case 1: empty list OR belongs at the front
-    if (head == null ||
-        newNode.fullNameKey().compareTo(head.fullNameKey()) < 0) {
+        // Case 1: empty list OR belongs at the front
+        if (head == null ||
+                newNode.fullNameKey().compareTo(head.fullNameKey()) < 0) {
 
-        newNode.next = head;
-        head = newNode;
-        return;
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        ObjectClass current = head;
+
+        // Walk until the next node should come AFTER newNode
+        while (current.next != null &&
+                current.next.fullNameKey()
+                        .compareTo(newNode.fullNameKey()) < 0) {
+
+            current = current.next;
+        }
+
+        // Insert between current and current.next
+        newNode.next = current.next;
+        current.next = newNode;
     }
-
-    ObjectClass current = head;
-
-    // Walk until the next node should come AFTER newNode
-    while (current.next != null &&
-           current.next.fullNameKey()
-               .compareTo(newNode.fullNameKey()) < 0) {
-
-        current = current.next;
-    }
-
-    // Insert between current and current.next
-    newNode.next = current.next;
-    current.next = newNode;
-}
-       // newNode.next = head;
-       // head = newNode;
-    
+    // newNode.next = head;
+    // head = newNode;
 
     // Search by first + last name
     public ObjectClass find(String fName, String lName) {
@@ -142,4 +142,30 @@ public class ManagerClass {
             System.out.println("Could not load file: " + filename);
         }
     }
+        public void saveToFile(String filename) {
+        try (PrintWriter out = new PrintWriter(filename)) {
+
+        ObjectClass current = head;
+        while (current != null) {
+
+            // Name line
+            out.println(current.fName + " " + current.lName);
+
+            // Address lines
+            out.println(current.address);
+            out.println(current.city);
+            out.println(current.pNumber);
+
+            // Blank separator line
+            out.println();
+
+            current = current.next;
+        }
+
+        System.out.println("Directory saved to: " + filename);
+
+    } catch (FileNotFoundException e) {
+        System.out.println("Could not save file: " + filename);
+    }
 }
+    }

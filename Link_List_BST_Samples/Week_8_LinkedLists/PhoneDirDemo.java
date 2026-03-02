@@ -13,7 +13,8 @@ public class PhoneDirDemo {
             System.out.println("2) Find Entry");
             System.out.println("3) Delete Entry");
             System.out.println("4) Print All");
-            System.out.println("5) Quit");
+            System.out.println("5) Save to File");
+            System.out.println("6) Quit");
             System.out.print("Choose: ");
 
             int choice = Integer.parseInt(kb.nextLine().trim());
@@ -57,7 +58,12 @@ public class PhoneDirDemo {
                 }
                 case 4 -> dir.printAll();
 
-                case 5 -> running = false;
+                case 5 -> {
+                    System.out.print("Filename to save to: ");
+                    String file = kb.nextLine();
+                    dir.saveToFile(file);
+                }
+                case 6 -> running = false;
                 default -> System.out.println("Invalid choice.");
             }
         }
