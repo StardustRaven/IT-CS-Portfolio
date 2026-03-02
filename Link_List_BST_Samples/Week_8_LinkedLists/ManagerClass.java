@@ -137,6 +137,7 @@ public class ManagerClass {
                 }
             }
             System.out.println("Loaded directory from: " + filename);
+            System.out.println("Total contacts: " + count());
 
         } catch (FileNotFoundException e) {
             System.out.println("Could not load file: " + filename);
@@ -176,5 +177,17 @@ public class ManagerClass {
         } catch (FileNotFoundException e) {
             System.out.println("Could not save file: " + filename);
         }
+    }
+
+    public int count() {
+        int total = 0;
+        ObjectClass current = head;
+
+        while (current != null) {
+            total++;
+            current = current.next;
+        }
+
+        return total;
     }
 }

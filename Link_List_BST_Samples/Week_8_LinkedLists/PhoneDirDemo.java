@@ -17,7 +17,15 @@ public class PhoneDirDemo {
             System.out.println("6) Quit");
             System.out.print("Choose: ");
 
-            int choice = Integer.parseInt(kb.nextLine().trim());
+            String input = kb.nextLine().trim();
+
+            int choice;
+            try {
+                choice = Integer.parseInt(input);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Enter a number 1-6.");
+                continue;
+            }
 
             switch (choice) {
                 case 1 -> {
