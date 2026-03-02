@@ -164,8 +164,8 @@ public class ManagerClass {
 
         System.out.println("Directory saved to: " + filename);
 
-    } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
         System.out.println("Could not save file: " + filename);
+        }
     }
 }
-    }
