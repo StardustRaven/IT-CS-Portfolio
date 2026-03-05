@@ -1,3 +1,15 @@
+/*
+ * SongNode.java
+ * Author: Star [Last Name]
+ * Course: CS II
+ * Date: March 2026
+ *
+ * Description:
+ * A node used in the doubly linked playlist.
+ * Each node stores a Song object and references
+ * to the next and previous nodes in the list.
+ */
+
 public class SongNode {
     private Song data;
     private SongNode next;

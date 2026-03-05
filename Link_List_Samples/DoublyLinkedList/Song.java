@@ -1,3 +1,17 @@
+/*
+ * Song.java
+ * Author: Star Isakson
+ * Course: CS II
+ * Assignment: Doubly Linked List Playlist
+ * Date: March 2026
+ *
+ * Description:
+ * Represents a song in the playlist. This class stores
+ * the song title and the associated Artist object.
+ * Song objects are stored inside SongNode objects
+ * within the doubly linked list managed by PlaylistManager.
+ */
+
 public class Song {
     private String title;
     private Artist artist;   // keeps artist info structured

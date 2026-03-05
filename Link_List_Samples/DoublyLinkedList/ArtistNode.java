@@ -1,3 +1,15 @@
+/*
+ * ArtistNode.java
+ * Author: Star [Last Name]
+ * Course: CS II
+ * Date: March 2026
+ *
+ * Description:
+ * A node used to store Artist objects within a
+ * linked structure. Contains references to the
+ * next and/or previous nodes depending on usage.
+ */
+
 public class ArtistNode {
     private Artist data;
     private ArtistNode next;

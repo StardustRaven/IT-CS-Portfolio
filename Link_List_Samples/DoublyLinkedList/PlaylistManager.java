@@ -81,9 +81,10 @@ public class PlaylistManager {
         }
 
         System.out.println("\nPlaylist contains " + count + " tracks:\n");
-        
+
         SongNode cur = tail;
-        int i = count;
+        int i = getCount();
+        
         while (cur != null) {
             System.out.println(i + ". " + cur.getData());
             cur = cur.getPrev();
