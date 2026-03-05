@@ -1,11 +1,13 @@
-# IT-CS-Portfolio
+IT-CS-Portfolio
 
-School assignments and lab work I’m sharing publicly for prospective employers.
+This repository contains Java projects demonstrating
+core computer science concepts including:
 
-## Highlights
-- Java / CS coursework (data structures, recursion, I/O)
-- IT & troubleshooting notes / writeups
-- Cybersecurity labs (when allowed by class policy)
+• String processing
+• Recursion
+• Singly linked lists
+• Doubly linked lists
+• Binary search trees
 
-## Structure
-Each folder is labeled by course/week/assignment when possible.
+Each folder contains small programs written while
+studying Computer Science II.
