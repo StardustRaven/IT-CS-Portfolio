@@ -1,13 +1,18 @@
-IT-CS-Portfolio
+# IT-CS-Portfolio
 
-This repository contains Java projects demonstrating
-core computer science concepts including:
+This repository contains Java projects demonstrating core computer science concepts.
 
-• String processing
-• Recursion
-• Singly linked lists
-• Doubly linked lists
-• Binary search trees
+## Topics Covered
 
-Each folder contains small programs written while
-studying Computer Science II.
+- String Processing
+- Recursion
+- Singly Linked Lists
+- Doubly Linked Lists
+- Binary Search Trees
+
+## About
+
+Each folder contains small Java programs written while studying **Computer Science II**.  
+Projects focus on learning fundamental data structures, recursion, and object-oriented programming.
+
+## Repository Structure
