@@ -1,6 +1,6 @@
 /*
  * ArtistNode.java
- * Author: Star [Last Name]
+ * Author: Star Isakson
  * Course: CS II
  * Date: March 2026
  *

@@ -1,3 +1,18 @@
+/*
+ * PlaylistManager.java
+ * Author: Star Isakson
+ * Course: CS II
+ * Assignment: Doubly Linked List Playlist
+ * Date: March 2026
+ *
+ * Description:
+ * Manages a playlist implemented as a doubly linked list.
+ * Provides functionality to add songs, display the playlist
+ * forward and backward, load songs from a file, save the
+ * playlist to a file, and track the total number of songs
+ * in the playlist.
+ */
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -84,7 +99,7 @@ public class PlaylistManager {
 
         SongNode cur = tail;
         int i = getCount();
-        
+
         while (cur != null) {
             System.out.println(i + ". " + cur.getData());
             cur = cur.getPrev();

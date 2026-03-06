@@ -9,8 +9,14 @@
  * Songs can be loaded from a file, displayed forward or backward,
  * added manually, and saved back to a file. The program also
  * tracks the number of songs in the playlist.
+ * 
+ * Files:
+    *   PlaylistDemo.java
+    *   PlaylistManager.java
+    *   Song.java
+    *   SongNode.java
+    *   Artist.java
  */
-
 
 import java.util.Scanner;
 

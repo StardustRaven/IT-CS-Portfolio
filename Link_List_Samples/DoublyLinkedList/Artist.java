@@ -1,3 +1,15 @@
+/*
+ * Artist.java
+ * Author: Star [Last Name]
+ * Course: CS II
+ * Date: March 2026
+ *
+ * Description:
+ * Represents a musical artist. This class stores
+ * the artist's name and is associated with Song
+ * objects in the playlist.
+ */
+
 public class Artist {
     private String name;
 
