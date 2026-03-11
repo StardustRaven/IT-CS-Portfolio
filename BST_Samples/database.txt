@@ -1,0 +1,15 @@
+1042,Tanner,Ravenshield,Hearth Wing,555-1042
+1015,Star,Ravenshield,Hearth Wing,555-1015
+1091,Ashwhisker,Thistlewick,Market District,555-1091
+1033,Tracie,Wheelwright,Great Kitchen,555-1033
+1078,Tourney,Wheelwright,Forge District,555-1078
+1027,Kite,Irongate,Forge District,555-1027
+1114,Sylwen,Willowborne,Grove Department,555-1114
+1066,Elyria,Willowborne,Grove Department,555-1066
+1102,Badger,Cordon,Market District,555-1102
+1009,Wal,Cordon,Market District,555-1009
+1084,Kellan,Brightward,Watcher Command,555-1084
+1051,Thalen,Stormweaver,Elemental Flow Department,555-1051
+1120,Seris,Silverborn,Spindle Gate Command,555-1120
+1039,Marena,Irongate,Hearth Wing,555-1039
+1071,Charles,Vey,Watcher Retired,555-1071
