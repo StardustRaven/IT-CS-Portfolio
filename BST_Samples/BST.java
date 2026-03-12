@@ -1,9 +1,9 @@
 /*
- * File:
+ * File: BST.java
  * Author: Star Isakson
  * Course: CS II
- * Assignment: 
- * Date: 
+ * Assignment: Binary Search Trees
+ * Date: 3/11/2026
  *
  * Description:
  *
@@ -161,4 +161,19 @@ public class BST {
     public boolean isEmpty() {
         return root == null;
     }
+
+ public int height() {
+    return height(root);
+}
+
+private int height(PersonRecord node) {
+    if (node == null) {
+        return 0;
+    }
+
+    int leftHeight = height(node.left);
+    int rightHeight = height(node.right);
+
+    return 1 + Math.max(leftHeight, rightHeight);
+}
 }

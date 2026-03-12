@@ -1,9 +1,9 @@
 /*
- * File:
+ * File: PersonRecord.java
  * Author: Star Isakson
  * Course: CS II
- * Assignment: 
- * Date: 
+ * Assignment: Binary Search Trees
+ * Date: 3/11/2026
  *
  * Description:
  *

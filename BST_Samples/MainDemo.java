@@ -1,9 +1,9 @@
 /*
- * File:
+ * File: MainDemo.java
  * Author: Star Isakson
  * Course: CS II
- * Assignment: 
- * Date: 
+ * Assignment: Binary Search Trees
+ * Date: 3/11/2026
  *
  * Description:
  *
@@ -11,24 +11,32 @@
 
 import java.util.Scanner;
 
-public class Main {
+public class MainDemo {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+
         BST tree = new BST();
+        BSTLoop loopTree = new BSTLoop();
 
         // Sample data for testing
         tree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005", "MARKET");
         tree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002", "WATCH");
-        tree.insert(1008, "Elyria", "Willowmere", "Grove Path", "555-1008", "GROVE");
-        tree.insert(1001, "Star", "Isakson", "Hearth Wing", "555-1001", "WHEEL");
-        tree.insert(1003, "Seris", "Sliverborn", "Spindle Gate", "555-1003", "WATCH");
+        tree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008", "GROVE");
+        tree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001", "WHEEL");
+        tree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003", "WATCH");
+
+        loopTree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005", "MARKET");
+        loopTree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002", "WATCH");
+        loopTree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008", "GROVE");
+        loopTree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001", "WHEEL");
+        loopTree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003", "WATCH");
 
         int choice;
 
         do {
             System.out.println("\n===== Binary Search Tree Menu =====");
             System.out.println("1. Add record");
-            System.out.println("2. Remove record");
+            System.out.println("2. Remove record (recursive only for now)");
             System.out.println("3. Lookup record");
             System.out.println("4. Preorder traversal");
             System.out.println("5. Inorder traversal");
@@ -61,7 +69,9 @@ public class Main {
                     String groupId = input.nextLine();
 
                     tree.insert(id, firstName, lastName, address, phone, groupId);
-                    System.out.println("Record added.");
+                    loopTree.insert(id, firstName, lastName, address, phone, groupId);
+
+                    System.out.println("Record added to both trees.");
                     break;
 
                 case 2:
@@ -70,7 +80,8 @@ public class Main {
                     input.nextLine();
 
                     tree.delete(deleteId);
-                    System.out.println("Delete operation completed.");
+                    System.out.println("Delete completed in recursive tree.");
+                    System.out.println("Loop delete not added yet.");
                     break;
 
                 case 3:
@@ -79,27 +90,45 @@ public class Main {
                     input.nextLine();
 
                     PersonRecord found = tree.search(searchId);
+                    PersonRecLoop foundLoop = loopTree.search(searchId);
+
+                    System.out.println("\nRecursive search result:");
                     if (found != null) {
-                        System.out.println("Record found:");
                         System.out.println(found);
+                    } else {
+                        System.out.println("Record not found.");
+                    }
+
+                    System.out.println("\nLoop search result:");
+                    if (foundLoop != null) {
+                        System.out.println(foundLoop);
                     } else {
                         System.out.println("Record not found.");
                     }
                     break;
 
                 case 4:
-                    System.out.println("\nPreorder Traversal:");
+                    System.out.println("\nRecursive Preorder Traversal:");
                     tree.preorder();
+
+                    System.out.println("\nLoop Preorder Traversal:");
+                    loopTree.preorder();
                     break;
 
                 case 5:
-                    System.out.println("\nInorder Traversal:");
+                    System.out.println("\nRecursive Inorder Traversal:");
                     tree.inorder();
+
+                    System.out.println("\nLoop Inorder Traversal:");
+                    loopTree.inorder();
                     break;
 
                 case 6:
-                    System.out.println("\nPostorder Traversal:");
+                    System.out.println("\nRecursive Postorder Traversal:");
                     tree.postorder();
+
+                    System.out.println("\nLoop Postorder Traversal:");
+                    loopTree.postorder();
                     break;
 
                 case 7:
