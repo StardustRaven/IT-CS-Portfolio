@@ -9,6 +9,10 @@
  *
  */
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class BST {
     private PersonRecord root;
 
@@ -20,24 +24,23 @@ public class BST {
         return root;
     }
 
-    // =========================
     // ADD / INSERT (recursive)
-    // =========================
+
     public void insert(int id, String firstName, String lastName,
-                       String address, String phone, String groupId) {
-        root = insertRecursive(root, id, firstName, lastName, address, phone, groupId);
+            String address, String phone) {
+        root = insertRecursive(root, id, firstName, lastName, address, phone);
     }
 
     private PersonRecord insertRecursive(PersonRecord current, int id, String firstName, String lastName,
-                                         String address, String phone, String groupId) {
+            String address, String phone) {
         if (current == null) {
-            return new PersonRecord(id, firstName, lastName, address, phone, groupId);
+            return new PersonRecord(id, firstName, lastName, address, phone);
         }
 
         if (id < current.id) {
-            current.left = insertRecursive(current.left, id, firstName, lastName, address, phone, groupId);
+            current.left = insertRecursive(current.left, id, firstName, lastName, address, phone);
         } else if (id > current.id) {
-            current.right = insertRecursive(current.right, id, firstName, lastName, address, phone, groupId);
+            current.right = insertRecursive(current.right, id, firstName, lastName, address, phone);
         } else {
             System.out.println("Duplicate ID not allowed: " + id);
         }
@@ -45,9 +48,8 @@ public class BST {
         return current;
     }
 
-    // =========================
     // LOOKUP / SEARCH (recursive)
-    // =========================
+
     public PersonRecord search(int id) {
         return searchRecursive(root, id);
     }
@@ -64,9 +66,8 @@ public class BST {
         }
     }
 
-    // =========================
     // REMOVE / DELETE (recursive)
-    // =========================
+
     public void delete(int id) {
         root = deleteRecursive(root, id);
     }
@@ -101,7 +102,6 @@ public class BST {
             current.lastName = smallestInRight.lastName;
             current.address = smallestInRight.address;
             current.phone = smallestInRight.phone;
-            current.groupId = smallestInRight.groupId;
 
             current.right = deleteRecursive(current.right, smallestInRight.id);
         }
@@ -116,9 +116,8 @@ public class BST {
         return current;
     }
 
-    // =========================
     // TRAVERSALS
-    // =========================
+
     public void preorder() {
         preorderRecursive(root);
     }
@@ -155,25 +154,55 @@ public class BST {
         }
     }
 
-    // =========================
     // HELPER
-    // =========================
+
     public boolean isEmpty() {
         return root == null;
     }
 
- public int height() {
-    return height(root);
-}
-
-private int height(PersonRecord node) {
-    if (node == null) {
-        return 0;
+    public int height() {
+        return height(root);
     }
 
-    int leftHeight = height(node.left);
-    int rightHeight = height(node.right);
+    private int height(PersonRecord node) {
+        if (node == null) {
+            return 0;
+        }
 
-    return 1 + Math.max(leftHeight, rightHeight);
-}
+        int leftHeight = height(node.left);
+        int rightHeight = height(node.right);
+
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
+    // Adding print to file capability
+    public void saveToFile(String filename) {
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
+
+            saveInOrder(root, writer);
+
+            System.out.println("Recursive BST saved to " + filename);
+
+        } catch (IOException e) {
+
+            System.out.println("Error saving file: " + e.getMessage());
+        }
+    }
+
+    private void saveInOrder(PersonRecord current, PrintWriter writer) {
+
+        if (current != null) {
+
+            saveInOrder(current.left, writer);
+
+            writer.println(current.id + "," +
+                    current.firstName + "," +
+                    current.lastName + "," +
+                    current.address + "," +
+                    current.phone);
+
+            saveInOrder(current.right, writer);
+        }
+    }
 }

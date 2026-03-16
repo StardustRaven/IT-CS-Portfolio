@@ -15,19 +15,17 @@ public class PersonRecord {
     String lastName;
     String address;
     String phone;
-    String groupId;
 
     PersonRecord left;
     PersonRecord right;
 
     public PersonRecord(int id, String firstName, String lastName,
-                        String address, String phone, String groupId) {
+                        String address, String phone) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
-        this.groupId = groupId;
         this.left = null;
         this.right = null;
     }
@@ -37,7 +35,6 @@ public class PersonRecord {
         return "ID: " + id +
                ", Name: " + firstName + " " + lastName +
                ", Address: " + address +
-               ", Phone: " + phone +
-               ", Group ID: " + groupId;
+               ", Phone: " + phone;
     }
 }

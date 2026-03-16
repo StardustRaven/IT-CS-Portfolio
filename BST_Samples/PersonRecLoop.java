@@ -16,20 +16,18 @@ public class PersonRecLoop {
     String lastName;
     String address;
     String phone;
-    String groupId;
 
     PersonRecLoop left;
     PersonRecLoop right;
 
     public PersonRecLoop(int id, String firstName, String lastName,
-            String address, String phone, String groupId) {
+            String address, String phone) {
 
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
-        this.groupId = groupId;
 
         left = null;
         right = null;
@@ -40,7 +38,6 @@ public String toString() {
     return "ID: " + id +
            ", Name: " + firstName + " " + lastName +
            ", Address: " + address +
-           ", Phone: " + phone +
-           ", Group ID: " + groupId;
+           ", Phone: " + phone;
 }
 }

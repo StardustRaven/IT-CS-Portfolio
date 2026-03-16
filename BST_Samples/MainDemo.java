@@ -19,17 +19,17 @@ public class MainDemo {
         BSTLoop loopTree = new BSTLoop();
 
         // Sample data for testing
-        tree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005", "MARKET");
-        tree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002", "WATCH");
-        tree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008", "GROVE");
-        tree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001", "WHEEL");
-        tree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003", "WATCH");
+        tree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005");
+        tree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002");
+        tree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008");
+        tree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001");
+        tree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003");
 
-        loopTree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005", "MARKET");
-        loopTree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002", "WATCH");
-        loopTree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008", "GROVE");
-        loopTree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001", "WHEEL");
-        loopTree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003", "WATCH");
+        loopTree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005");
+        loopTree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002");
+        loopTree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008");
+        loopTree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001");
+        loopTree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003");
 
         int choice;
 
@@ -41,7 +41,8 @@ public class MainDemo {
             System.out.println("4. Preorder traversal");
             System.out.println("5. Inorder traversal");
             System.out.println("6. Postorder traversal");
-            System.out.println("7. Exit");
+            System.out.println("7. Save database");
+            System.out.println("8. Exit");
             System.out.print("Enter choice: ");
 
             choice = input.nextInt();
@@ -65,11 +66,8 @@ public class MainDemo {
                     System.out.print("Enter phone: ");
                     String phone = input.nextLine();
 
-                    System.out.print("Enter group ID: ");
-                    String groupId = input.nextLine();
-
-                    tree.insert(id, firstName, lastName, address, phone, groupId);
-                    loopTree.insert(id, firstName, lastName, address, phone, groupId);
+                    tree.insert(id, firstName, lastName, address, phone);
+                    loopTree.insert(id, firstName, lastName, address, phone);
 
                     System.out.println("Record added to both trees.");
                     break;
@@ -132,6 +130,10 @@ public class MainDemo {
                     break;
 
                 case 7:
+                    tree.saveToFile("database.txt");
+                    break;
+
+                case 8:
                     System.out.println("Exiting program.");
                     break;
 
@@ -139,7 +141,7 @@ public class MainDemo {
                     System.out.println("Invalid choice.");
             }
 
-        } while (choice != 7);
+        } while (choice != 8);
 
         input.close();
     }
