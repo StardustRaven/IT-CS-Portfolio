@@ -1,0 +1,1 @@
+I implemented AVL insertion and balancing to demonstrate understanding of self-balancing BST behavior. I did not implement delete for the AVL version.

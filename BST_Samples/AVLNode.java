@@ -1,14 +1,15 @@
 /*
- * File: PersonRecord.java
+ * File: AVLNode.java
  * Author: Star Isakson
  * Course: CS II
  * Assignment: Binary Search Trees / AVL Tree Extra Credit
  * Date: 3/11/2026
  *
- * Description: Stores one person record for the recursive BST implementation.
+ * Description:
+ * Stores one person record for the AVL tree, including node height.
  */
 
-public class PersonRecord {
+public class AVLNode {
 
     int id;
     String firstName;
@@ -16,20 +17,24 @@ public class PersonRecord {
     String address;
     String phone;
 
-    PersonRecord left;
-    PersonRecord right;
+    int height;
+    AVLNode left;
+    AVLNode right;
 
     // =========================
     // CONSTRUCTOR
     // =========================
-    // Creates a new record node for the recursive BST
-    public PersonRecord(int id, String firstName, String lastName,
-                        String address, String phone) {
+    // Creates a new AVL node with initial height of 1
+    public AVLNode(int id, String firstName, String lastName,
+                   String address, String phone) {
+
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
+
+        this.height = 1;
         this.left = null;
         this.right = null;
     }

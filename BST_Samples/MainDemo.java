@@ -2,33 +2,40 @@
  * File: MainDemo.java
  * Author: Star Isakson
  * Course: CS II
- * Assignment: Binary Search Trees
+ * Assignment: Binary Search Trees / AVL Tree Extra Credit
  * Date: 3/11/2026
  *
  * Description:
- *
+ * Demonstrates recursive BST, iterative BST, and AVL tree operations
+ * including load, insert, search, traversal, delete, and save.
  */
 
-import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class MainDemo {
+
+    // =========================
+    // MAIN PROGRAM
+    // =========================
+    // Runs the menu-driven tree demo
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
         BST tree = new BST();
         BSTLoop loopTree = new BSTLoop();
+        AVLTree avlTree = new AVLTree();
 
-        loadFromFile("database.txt", tree, loopTree);
+        loadFromFile("database.txt", tree, loopTree, avlTree);
 
         int choice;
 
         do {
-            System.out.println("\n===== Binary Search Tree Menu =====");
+            System.out.println("\n===== BST / AVL Menu =====");
             System.out.println("1. Add record");
-            System.out.println("2. Remove record (recursive only for now)");
+            System.out.println("2. Remove record");
             System.out.println("3. Lookup record");
             System.out.println("4. Preorder traversal");
             System.out.println("5. Inorder traversal");
@@ -38,7 +45,7 @@ public class MainDemo {
             System.out.print("Enter choice: ");
 
             choice = input.nextInt();
-            input.nextLine(); // clear newline
+            input.nextLine();
 
             switch (choice) {
                 case 1:
@@ -60,8 +67,9 @@ public class MainDemo {
 
                     tree.insert(id, firstName, lastName, address, phone);
                     loopTree.insert(id, firstName, lastName, address, phone);
+                    avlTree.insert(id, firstName, lastName, address, phone);
 
-                    System.out.println("Record added to both trees.");
+                    System.out.println("Record added to all trees.");
                     break;
 
                 case 2:
@@ -70,8 +78,10 @@ public class MainDemo {
                     input.nextLine();
 
                     tree.delete(deleteId);
-                    System.out.println("Delete completed in recursive tree.");
-                    System.out.println("Loop delete not added yet.");
+                    loopTree.delete(deleteId);
+
+                    System.out.println("Delete completed in recursive and loop trees.");
+                    System.out.println("AVL delete not implemented.");
                     break;
 
                 case 3:
@@ -81,6 +91,7 @@ public class MainDemo {
 
                     PersonRecord found = tree.search(searchId);
                     PersonRecLoop foundLoop = loopTree.search(searchId);
+                    AVLNode foundAVL = avlTree.search(searchId);
 
                     System.out.println("\nRecursive search result:");
                     if (found != null) {
@@ -95,6 +106,13 @@ public class MainDemo {
                     } else {
                         System.out.println("Record not found.");
                     }
+
+                    System.out.println("\nAVL search result:");
+                    if (foundAVL != null) {
+                        System.out.println(foundAVL);
+                    } else {
+                        System.out.println("Record not found.");
+                    }
                     break;
 
                 case 4:
@@ -103,6 +121,9 @@ public class MainDemo {
 
                     System.out.println("\nLoop Preorder Traversal:");
                     loopTree.preorder();
+
+                    System.out.println("\nAVL Preorder Traversal:");
+                    avlTree.preorder();
                     break;
 
                 case 5:
@@ -111,6 +132,9 @@ public class MainDemo {
 
                     System.out.println("\nLoop Inorder Traversal:");
                     loopTree.inorder();
+
+                    System.out.println("\nAVL Inorder Traversal:");
+                    avlTree.inorder();
                     break;
 
                 case 6:
@@ -119,11 +143,16 @@ public class MainDemo {
 
                     System.out.println("\nLoop Postorder Traversal:");
                     loopTree.postorder();
+
+                    System.out.println("\nAVL Postorder Traversal:");
+                    System.out.println("Not implemented for AVL.");
                     break;
 
                 case 7:
-                    System.out.println("Saving file to: " + new java.io.File("database.txt").getAbsolutePath());
-                    tree.saveToFile("database.txt");
+                    tree.saveToFile("database_recursive.txt");
+                    loopTree.saveToFile("database_loop.txt");
+                    avlTree.saveToFile("database_avl.txt");
+                    System.out.println("Recursive, loop, and AVL trees saved successfully.");
                     break;
 
                 case 8:
@@ -139,16 +168,18 @@ public class MainDemo {
         input.close();
     }
 
-    public static void loadFromFile(String filename, BST tree, BSTLoop loopTree) {
-
+    // =========================
+    // LOAD FROM FILE
+    // =========================
+    // Loads records from a text file into all three tree types
+    public static void loadFromFile(String filename, BST tree, BSTLoop loopTree, AVLTree avlTree) {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
-
             String line;
 
             while ((line = reader.readLine()) != null) {
-
-                if (line.trim().isEmpty())
+                if (line.trim().isEmpty()) {
                     continue;
+                }
 
                 String[] parts = line.split(",");
 
@@ -160,16 +191,15 @@ public class MainDemo {
 
                 tree.insert(id, firstName, lastName, address, phone);
                 loopTree.insert(id, firstName, lastName, address, phone);
+                avlTree.insert(id, firstName, lastName, address, phone);
             }
 
             System.out.println("Database loaded from " + filename);
 
-            // quick visual check
             System.out.println("\nLoaded records:");
             tree.inorder();
 
         } catch (IOException e) {
-
             System.out.println("No database file found. Starting empty.");
         }
     }

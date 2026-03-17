@@ -2,62 +2,62 @@
  * File: BSTLoop.java
  * Author: Star Isakson
  * Course: CS II
- * Assignment: Binary Search Trees
+ * Assignment: Binary Search Trees / AVL Tree Extra Credit
  * Date: 3/11/2026
  *
  * Description:
- * Iterative (loop-based) Binary Search Tree implementation using PersonRecLoop nodes.
- * Supports insert, search, and tree traversals without recursion.
+ * Iterative Binary Search Tree implementation supporting insert, search,
+ * delete, traversal, and file save operations without recursion.
  */
 
-import java.util.Stack;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Stack;
 
 public class BSTLoop {
 
-    // Root of the tree
-    PersonRecLoop root;
+    // Root of the iterative BST
+    private PersonRecLoop root;
 
-    // ADD / INSERT (iterative)
+    // =========================
+    // CONSTRUCTOR
+    // =========================
+    // Creates an empty iterative BST
+    public BSTLoop() {
+        root = null;
+    }
 
+    // =========================
+    // INSERT
+    // =========================
+    // Inserts a new record into the tree using loops
     public void insert(int id, String firstName, String lastName,
-            String address, String phone) {
+                       String address, String phone) {
 
-        // Create the new node to be inserted
         PersonRecLoop newNode = new PersonRecLoop(id, firstName, lastName, address, phone);
 
-        // If tree is empty, new node becomes the root
         if (root == null) {
             root = newNode;
             return;
         }
 
-        // Start at the root and move downward until an empty spot is found
         PersonRecLoop current = root;
         PersonRecLoop parent = null;
 
         while (current != null) {
-
             parent = current;
 
-            // Move left if new id is smaller
             if (id < current.id) {
                 current = current.left;
-
-                // Move right if new id is larger
             } else if (id > current.id) {
                 current = current.right;
-
-                // Duplicate ids are not allowed
             } else {
-                System.out.println("Duplicate ID not allowed.");
+                System.out.println("Duplicate ID not allowed. Record skipped.");
                 return;
             }
         }
 
-        // Attach the new node to the correct side of the parent
         if (id < parent.id) {
             parent.left = newNode;
         } else {
@@ -65,21 +65,18 @@ public class BSTLoop {
         }
     }
 
-    // LOOKUP / SEARCH (iterative)
-
+    // =========================
+    // SEARCH
+    // =========================
+    // Searches for a record by ID using loops
     public PersonRecLoop search(int id) {
-
-        // Start searching at the root
         PersonRecLoop current = root;
 
         while (current != null) {
-
-            // If matching id is found, return that node
             if (current.id == id) {
                 return current;
             }
 
-            // Move left or right depending on comparison
             if (id < current.id) {
                 current = current.left;
             } else {
@@ -87,43 +84,102 @@ public class BSTLoop {
             }
         }
 
-        // If loop ends, the id was not found
         return null;
     }
 
-    // HELPER
+    // =========================
+    // DELETE
+    // =========================
+    // Deletes a record by ID using loops
+    public void delete(int id) {
+        PersonRecLoop current = root;
+        PersonRecLoop parent = null;
 
+        // Step 1: find node and parent
+        while (current != null && current.id != id) {
+            parent = current;
+
+            if (id < current.id) {
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+
+        // If record was not found
+        if (current == null) {
+            System.out.println("Record not found.");
+            return;
+        }
+
+        // Case 3: node has two children
+        if (current.left != null && current.right != null) {
+            PersonRecLoop successorParent = current;
+            PersonRecLoop successor = current.right;
+
+            while (successor.left != null) {
+                successorParent = successor;
+                successor = successor.left;
+            }
+
+            current.id = successor.id;
+            current.firstName = successor.firstName;
+            current.lastName = successor.lastName;
+            current.address = successor.address;
+            current.phone = successor.phone;
+
+            current = successor;
+            parent = successorParent;
+        }
+
+        // Case 1 and 2: node has zero or one child
+        PersonRecLoop child;
+
+        if (current.left != null) {
+            child = current.left;
+        } else {
+            child = current.right;
+        }
+
+        // Reconnect parent to replacement child
+        if (parent == null) {
+            root = child;
+        } else if (parent.left == current) {
+            parent.left = child;
+        } else {
+            parent.right = child;
+        }
+    }
+
+    // =========================
+    // HELPERS
+    // =========================
+    // Returns true if the tree has no nodes
     public boolean isEmpty() {
         return root == null;
     }
 
-    // TRAVERSALS (iterative)
-
-    // Inorder: Left, Root, Right
+    // =========================
+    // TRAVERSALS
+    // =========================
+    // Prints records in inorder using a stack
     public void inorder() {
         Stack<PersonRecLoop> stack = new Stack<>();
         PersonRecLoop current = root;
 
-        // Continue while there are nodes to process
-        // either in the stack or in the current branch
         while (current != null || !stack.isEmpty()) {
-
-            // Push all left children onto the stack
             while (current != null) {
                 stack.push(current);
                 current = current.left;
             }
 
-            // Visit the node at the top of the stack
             current = stack.pop();
             System.out.println(current);
-
-            // Move to the right subtree
             current = current.right;
         }
     }
 
-    // Preorder: Root, Left, Right
+    // Prints records in preorder using a stack
     public void preorder() {
         if (root == null) {
             return;
@@ -136,7 +192,6 @@ public class BSTLoop {
             PersonRecLoop current = stack.pop();
             System.out.println(current);
 
-            // Push right first so left is processed first
             if (current.right != null) {
                 stack.push(current.right);
             }
@@ -147,14 +202,12 @@ public class BSTLoop {
         }
     }
 
-    // Postorder: Left, Right, Root
+    // Prints records in postorder using two stacks
     public void postorder() {
         if (root == null) {
             return;
         }
 
-        // First stack is used to process nodes
-        // Second stack reverses the order for postorder output
         Stack<PersonRecLoop> stack1 = new Stack<>();
         Stack<PersonRecLoop> stack2 = new Stack<>();
 
@@ -164,7 +217,6 @@ public class BSTLoop {
             PersonRecLoop current = stack1.pop();
             stack2.push(current);
 
-            // Push left and right children into stack1
             if (current.left != null) {
                 stack1.push(current.left);
             }
@@ -174,21 +226,21 @@ public class BSTLoop {
             }
         }
 
-        // Print nodes in postorder
         while (!stack2.isEmpty()) {
             System.out.println(stack2.pop());
         }
     }
-// adding print to file capability
+
+    // =========================
+    // SAVE TO FILE
+    // =========================
+    // Saves tree records in sorted order using iterative inorder traversal
     public void saveToFile(String filename) {
-
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-
             Stack<PersonRecLoop> stack = new Stack<>();
             PersonRecLoop current = root;
 
             while (current != null || !stack.isEmpty()) {
-
                 while (current != null) {
                     stack.push(current);
                     current = current.left;
@@ -197,18 +249,16 @@ public class BSTLoop {
                 current = stack.pop();
 
                 writer.println(current.id + "," +
-                        current.firstName + "," +
-                        current.lastName + "," +
-                        current.address + "," +
-                        current.phone);
+                               current.firstName + "," +
+                               current.lastName + "," +
+                               current.address + "," +
+                               current.phone);
 
                 current = current.right;
             }
 
             System.out.println("Loop BST saved to " + filename);
-
         } catch (IOException e) {
-
             System.out.println("Error saving file: " + e.getMessage());
         }
     }

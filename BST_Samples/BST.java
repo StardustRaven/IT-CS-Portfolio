@@ -2,11 +2,12 @@
  * File: BST.java
  * Author: Star Isakson
  * Course: CS II
- * Assignment: Binary Search Trees
+ * Assignment: Binary Search Trees / AVL Tree Extra Credit
  * Date: 3/11/2026
  *
  * Description:
- *
+ * Recursive Binary Search Tree implementation supporting insert, search,
+ * delete, traversal, height, and file save operations.
  */
 
 import java.io.FileWriter;
@@ -14,25 +15,38 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 public class BST {
+
+    // Root of the recursive BST
     private PersonRecord root;
 
+    // =========================
+    // CONSTRUCTOR
+    // =========================
+    // Creates an empty recursive BST
     public BST() {
         root = null;
     }
 
+    // =========================
+    // ROOT ACCESS
+    // =========================
+    // Returns the root node of the tree
     public PersonRecord getRoot() {
         return root;
     }
 
-    // ADD / INSERT (recursive)
-
+    // =========================
+    // INSERT
+    // =========================
+    // Public insert method starts recursive insertion at the root
     public void insert(int id, String firstName, String lastName,
-            String address, String phone) {
+                       String address, String phone) {
         root = insertRecursive(root, id, firstName, lastName, address, phone);
     }
 
-    private PersonRecord insertRecursive(PersonRecord current, int id, String firstName, String lastName,
-            String address, String phone) {
+    // Recursively inserts a new record into the BST
+    private PersonRecord insertRecursive(PersonRecord current, int id, String firstName,
+                                         String lastName, String address, String phone) {
         if (current == null) {
             return new PersonRecord(id, firstName, lastName, address, phone);
         }
@@ -42,18 +56,21 @@ public class BST {
         } else if (id > current.id) {
             current.right = insertRecursive(current.right, id, firstName, lastName, address, phone);
         } else {
-            System.out.println("Duplicate ID not allowed: " + id);
+            System.out.println("Duplicate ID not allowed. Record skipped.");
         }
 
         return current;
     }
 
-    // LOOKUP / SEARCH (recursive)
-
+    // =========================
+    // SEARCH
+    // =========================
+    // Public search method finds a record by ID
     public PersonRecord search(int id) {
         return searchRecursive(root, id);
     }
 
+    // Recursively searches for a record by ID
     private PersonRecord searchRecursive(PersonRecord current, int id) {
         if (current == null || current.id == id) {
             return current;
@@ -66,12 +83,15 @@ public class BST {
         }
     }
 
-    // REMOVE / DELETE (recursive)
-
+    // =========================
+    // DELETE
+    // =========================
+    // Public delete method removes a record by ID
     public void delete(int id) {
         root = deleteRecursive(root, id);
     }
 
+    // Recursively deletes a record and reconnects the tree
     private PersonRecord deleteRecursive(PersonRecord current, int id) {
         if (current == null) {
             return null;
@@ -109,6 +129,7 @@ public class BST {
         return current;
     }
 
+    // Finds the smallest node in a subtree
     private PersonRecord findMin(PersonRecord current) {
         while (current.left != null) {
             current = current.left;
@@ -116,12 +137,15 @@ public class BST {
         return current;
     }
 
+    // =========================
     // TRAVERSALS
-
+    // =========================
+    // Prints records in preorder
     public void preorder() {
         preorderRecursive(root);
     }
 
+    // Recursively prints root, left, then right
     private void preorderRecursive(PersonRecord current) {
         if (current != null) {
             System.out.println(current);
@@ -130,10 +154,12 @@ public class BST {
         }
     }
 
+    // Prints records in inorder
     public void inorder() {
         inorderRecursive(root);
     }
 
+    // Recursively prints left, root, then right
     private void inorderRecursive(PersonRecord current) {
         if (current != null) {
             inorderRecursive(current.left);
@@ -142,10 +168,12 @@ public class BST {
         }
     }
 
+    // Prints records in postorder
     public void postorder() {
         postorderRecursive(root);
     }
 
+    // Recursively prints left, right, then root
     private void postorderRecursive(PersonRecord current) {
         if (current != null) {
             postorderRecursive(current.left);
@@ -154,16 +182,20 @@ public class BST {
         }
     }
 
-    // HELPER
-
+    // =========================
+    // HELPERS
+    // =========================
+    // Returns true if the tree has no nodes
     public boolean isEmpty() {
         return root == null;
     }
 
+    // Returns the height of the tree
     public int height() {
         return height(root);
     }
 
+    // Recursively calculates subtree height
     private int height(PersonRecord node) {
         if (node == null) {
             return 0;
@@ -175,32 +207,29 @@ public class BST {
         return 1 + Math.max(leftHeight, rightHeight);
     }
 
-    // Adding print to file capability
+    // =========================
+    // SAVE TO FILE
+    // =========================
+    // Saves tree records in sorted order using inorder traversal
     public void saveToFile(String filename) {
-
         try (PrintWriter writer = new PrintWriter(new FileWriter(filename))) {
-
             saveInOrder(root, writer);
-
             System.out.println("Recursive BST saved to " + filename);
-
         } catch (IOException e) {
-
             System.out.println("Error saving file: " + e.getMessage());
         }
     }
 
+    // Recursively writes inorder records to the file
     private void saveInOrder(PersonRecord current, PrintWriter writer) {
-
         if (current != null) {
-
             saveInOrder(current.left, writer);
 
             writer.println(current.id + "," +
-                    current.firstName + "," +
-                    current.lastName + "," +
-                    current.address + "," +
-                    current.phone);
+                           current.firstName + "," +
+                           current.lastName + "," +
+                           current.address + "," +
+                           current.phone);
 
             saveInOrder(current.right, writer);
         }
