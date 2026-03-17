@@ -10,6 +10,9 @@
  */
 
 import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class MainDemo {
     public static void main(String[] args) {
@@ -18,18 +21,7 @@ public class MainDemo {
         BST tree = new BST();
         BSTLoop loopTree = new BSTLoop();
 
-        // Sample data for testing
-        tree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005");
-        tree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002");
-        tree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008");
-        tree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001");
-        tree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003");
-
-        loopTree.insert(1005, "Ashwhisker", "Thistlewick", "Market Row", "555-1005");
-        loopTree.insert(1002, "Tanner", "Ravenshield", "Hearth Wing", "555-1002");
-        loopTree.insert(1008, "Elyria", "Willowborne", "Grove Path", "555-1008");
-        loopTree.insert(1001, "Star", "Ravenshield", "Hearth Wing", "555-1001");
-        loopTree.insert(1003, "Seris", "Silverthorn", "Spindle Gate", "555-1003");
+        loadFromFile("database.txt", tree, loopTree);
 
         int choice;
 
@@ -130,6 +122,7 @@ public class MainDemo {
                     break;
 
                 case 7:
+                    System.out.println("Saving file to: " + new java.io.File("database.txt").getAbsolutePath());
                     tree.saveToFile("database.txt");
                     break;
 
@@ -144,5 +137,40 @@ public class MainDemo {
         } while (choice != 8);
 
         input.close();
+    }
+
+    public static void loadFromFile(String filename, BST tree, BSTLoop loopTree) {
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+
+                if (line.trim().isEmpty())
+                    continue;
+
+                String[] parts = line.split(",");
+
+                int id = Integer.parseInt(parts[0]);
+                String firstName = parts[1];
+                String lastName = parts[2];
+                String address = parts[3];
+                String phone = parts[4];
+
+                tree.insert(id, firstName, lastName, address, phone);
+                loopTree.insert(id, firstName, lastName, address, phone);
+            }
+
+            System.out.println("Database loaded from " + filename);
+
+            // quick visual check
+            System.out.println("\nLoaded records:");
+            tree.inorder();
+
+        } catch (IOException e) {
+
+            System.out.println("No database file found. Starting empty.");
+        }
     }
 }
